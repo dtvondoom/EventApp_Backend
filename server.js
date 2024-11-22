@@ -45,12 +45,6 @@ app.post('/newEventA',async(req,res)=>{
         });
         let percentageLeft = getPercentage(totalQuantity,totalRemaining);
         let ticketColor = getColor(percentageLeft);
-        // const processedTickets = req.body.tickets.map(ticket => {
-        //     return {
-        //         ...ticket,
-        //         ticketColor // Same color for all tickets in the event                   MALLON USELESS PREPEI NA EMEINE APO PROHGOUMENO TRY CHECK 
-        //     };
-        // });
         const event = await Event.create({
             ...req.body, 
             ticketColor, 
