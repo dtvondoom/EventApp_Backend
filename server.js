@@ -169,7 +169,7 @@ app.get(`/events/:location`,async(req,res)=>{
 
 // change username and password before use 
 mongoose.
-connect('mongodb+srv://SkgEventApp:Year2425@eventappcluster.l1uub.mongodb.net/?retryWrites=true&w=majority&appName=EventAppCluster')
+connect('mongodb+srv://username:password@eventappcluster.l1uub.mongodb.net/?retryWrites=true&w=majority&appName=EventAppCluster')
 .then(() => {
     console.log('Connected to MongoDB')
 }).catch((error)=>{
