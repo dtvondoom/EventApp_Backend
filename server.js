@@ -156,7 +156,7 @@ app.get(`/events/:location`,async(req,res)=>{
         const {location} = req.params; 
         const rightLocation = locationTranslate[location.toLowerCase()];
         if(!rightLocation){
-            res.status(404).json({message:`There are currently no events in ${location}`})
+            res.status(404).json({message:`Invalid location: ${location}`})
         }
         const events = await Event.find({location: rightLocation});
         if(!events || events.length == 0){
