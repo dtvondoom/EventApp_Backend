@@ -77,7 +77,7 @@ const eventSchema = mongoose.Schema(
             type:String,
             required:true
         },
-        diorganwthsName:{
+        organizerName:{
             type:String,
             required: true
         },
