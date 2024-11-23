@@ -142,6 +142,7 @@ app.get(`/findEvent/:id`,async(req,res)=>{
 
 const locationTranslate = {
     "thessaloniki": "ΘΕΣΣΑΛΟΝΙΚΗ",
+    "thessalonikh": "ΘΕΣΣΑΛΟΝΙΚΗ",
     "athens": "ΑΘΗΝΑ",
     "larisa": "ΛΑΡΙΣΑ",
     "hrakleio": "ΗΡΑΚΛΕΙΟ"
@@ -154,8 +155,11 @@ app.get(`/events/:location`,async(req,res)=>{
     try {
         const {location} = req.params; 
         const rightLocation = locationTranslate[location.toLowerCase()];
+        if(!rightLocation){
+            res.status(404).json({message:`There are currently no events in ${location}`})
+        }
         const events = await Event.find({location: rightLocation});
-        if(!events){
+        if(!events || events.length == 0){
             res.status(404).json({message:`There are currently no events in ${location}`})
         }else{
             res.status(200).json(events)
