@@ -138,6 +138,8 @@ app.get(`/findEvent/:id`,async(req,res)=>{
 })
 
 
+
+
 const locationTranslate = {
     "thessaloniki": "ΘΕΣΣΑΛΟΝΙΚΗ",
     "athens": "ΑΘΗΝΑ",
@@ -147,7 +149,7 @@ const locationTranslate = {
 
 };
 
-
+// Filter based on location
 app.get(`/events/:location`,async(req,res)=>{
     try {
         const {location} = req.params; 
@@ -162,9 +164,6 @@ app.get(`/events/:location`,async(req,res)=>{
         res.status(500).json({message: error.message})
     }
 })
-
-
-
 
 
 
