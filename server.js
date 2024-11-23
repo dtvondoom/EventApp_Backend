@@ -145,7 +145,27 @@ const locationTranslate = {
     "thessalonikh": "ΘΕΣΣΑΛΟΝΙΚΗ",
     "athens": "ΑΘΗΝΑ",
     "larisa": "ΛΑΡΙΣΑ",
-    "hrakleio": "ΗΡΑΚΛΕΙΟ"
+    "hrakleio": "ΗΡΑΚΛΕΙΟ",
+    "heraklion": "ΗΡΑΚΛΕΙΟ",
+    "patra": "ΠΑΤΡΑ",
+    "volos": "ΒΟΛΟΣ",
+    "ioannina": "ΓΙΑΝΝΕΝΑ",
+    "giannena": "ΓΙΑΝΝΕΝΑ",
+    "trikala": "ΤΡΙΚΑΛΑ",
+    "chalkida": "ΧΑΛΚΙΔΑ",
+    "serres": "ΣΕΡΡΕΣ",
+    "alexandroupoli": "ΑΛΕΞΑΝΔΡΟΥΠΟΛΗ",
+    "xanthi": "ΞΑΝΘΗ",
+    "katerini": "ΚΑΤΕΡΙΝΗ",
+    "kalamata": "ΚΑΛΑΜΑΤΑ",
+    "kavala": "ΚΑΒΑΛΑ",
+    "chania": "ΧΑΝΙΑ",
+    "lamia": "ΛΑΜΙΑ",
+    "komotini": "ΚΟΜΟΤΗΝΗ",
+    "rhodes": "ΡΟΔΟΣ",
+    "agrinio": "ΑΓΡΙΝΙΟ",
+    "drama": "ΔΡΑΜΑ",
+    "veria": "ΒΕΡΟΙΑ"
     // TO ADD MORE
 
 };
