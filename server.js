@@ -170,8 +170,8 @@ const locationTranslate = {
 
 };
 
-// Filter based on location
-app.get(`/events/:location`,async(req,res)=>{
+// Filter based on location me help apo locationTranslate
+app.get(`/events/location/:location`,async(req,res)=>{
     try {
         const {location} = req.params; 
         const rightLocation = locationTranslate[location.toLowerCase()];
@@ -181,6 +181,34 @@ app.get(`/events/:location`,async(req,res)=>{
         const events = await Event.find({location: rightLocation});
         if(!events || events.length == 0){
             res.status(404).json({message:`There are currently no events in ${location}`})
+        }else{
+            res.status(200).json(events)
+        }
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+})
+
+
+const typeTranslate = {
+    "standupcomedy": "STAND-UP COMEDY",
+    "synaylia" : "ΣΥΝΑΥΛΙΑ"
+    
+
+};
+
+
+// Filter based on location me help apo typeTranslate
+app.get(`/events/type/:eventType`,async(req,res)=>{
+    try {
+        const {eventType} = req.params;
+        const correctType = typeTranslate[eventType.toLowerCase()];
+        if(!correctType){
+            res.status(404).json({message:`Invalid event type: ${eventType}`})
+        }
+        const events = await Event.find({eventType: correctType});
+        if(!events || events.length == 0){
+            res.status(404).json({message:`There are no ${eventType}`})
         }else{
             res.status(200).json(events)
         }
