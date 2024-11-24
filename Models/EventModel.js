@@ -6,9 +6,17 @@ const eventSchema = mongoose.Schema(
             type:String,
             required:true
         },
-        artist: {
+        artist: {   // se periptwsh opou yparxei cast artist = prwtagwnisths h senariografos
             type: String,
             required:true
+        },
+        artist2:{
+            type: String,
+            required: false
+        },
+        cast:{
+            type:String,
+            required: false
         },
         location:{
             type: String,
