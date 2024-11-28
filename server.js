@@ -192,7 +192,17 @@ app.get(`/events/location/:location`,async(req,res)=>{
 
 const typeTranslate = {
     "standupcomedy": "STAND-UP COMEDY",
-    "synaylia" : "ΣΥΝΑΥΛΙΑ"
+    "synaulia" : "ΣΥΝΑΥΛΙΑ",
+    "concert" : "ΣΥΝΑΥΛΙΑ",
+    "theater" : "ΘΕΑΤΡΟ",
+    "theatro" : "ΘΕΑΤΡΟ",
+    "artgallery" : "ΕΚΘΕΣΗ ΤΕΧΝΗΣ",
+    "football" : "ΠΟΔΟΣΦΑΙΡΟ",
+    "podosfairo" : "ΠΟΔΟΣΦΑΙΡΟ",
+    "basketball" : "ΜΠΑΣΚΕΤ",
+    "mpasket" : "ΜΠΑΣΚΕΤ",
+    "volleyball" : "ΒΟΛΕΪ",
+    "volley" : "ΒΟΛΕΪ"
     
 
 };
