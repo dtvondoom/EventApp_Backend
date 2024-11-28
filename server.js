@@ -101,12 +101,11 @@ app.delete(`/deleteEvents`,async(req,res)=>{
 app.put('/updateEvent/:id',async(req,res)=>{
     try {
         const {id} = req.params;
-        const event = await Event.findByIdAndUpdate(id,req.body);
+        const event = await Event.findByIdAndUpdate(id,req.body, {new: true});
         if(!event){
             return res.status(404).json({message: `Cannot find event with id ${id}`})
         }
-        const updatedEvent = await Event.findById(id);
-        res.status(200).json(updatedEvent);
+        res.status(200).json(event);
     } catch (error) {
         res.status(500).json({message: error.message})
     }
