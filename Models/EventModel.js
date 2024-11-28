@@ -18,6 +18,10 @@ const eventSchema = mongoose.Schema(
             type:String,
             required: false
         },
+        imageLink:{
+            type: String,
+            required: false
+        },
         location:{
             type: String,
             required:true,
@@ -91,6 +95,10 @@ const eventSchema = mongoose.Schema(
         },
         // kokkino = sold out , portokali = sxedon sold out , kitrino = den paizei agxos yparxoyn tickets , prasino = sxedon ola apoylhta paei apato to event
         ticketColor:{
+            type:String,
+            required:true
+        },
+        customId:{
             type:String,
             required:true
         }
