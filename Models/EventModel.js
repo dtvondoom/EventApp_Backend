@@ -114,10 +114,6 @@ const eventSchema = mongoose.Schema(
             type:String,
             required:true
         },
-        customId:{
-            type:String,
-            required:true
-        }
 
     },
     {
