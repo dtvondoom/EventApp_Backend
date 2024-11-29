@@ -1,10 +1,15 @@
 const mongoose = require('mongoose')
 
 const eventSchema = mongoose.Schema(
-    {
+    {  
+        
         eventType:{
             type:String,
             required:true
+        },
+        name:{
+            type: String,
+            required:false // gia theatrikes parastaseis klp
         },
         artist: {   // se periptwsh opou yparxei cast artist = prwtagwnisths h senariografos
             type: String,
@@ -21,6 +26,17 @@ const eventSchema = mongoose.Schema(
         location:{
             type: String,
             required:true,
+        },
+        customId:{
+            type:String,
+            required: true,
+            unique: true,
+            validate:{
+                validator: function(val){
+                    return /^[a-z]{1}_[a-z]{3}_[a-z]{2,}$/.test(val)
+                },
+                message:props=> `${props.value} is not a valid custom Id.Expected format: 3 letters_1 letter_>1 letters`
+            },
         },
         date:{
             type:String,

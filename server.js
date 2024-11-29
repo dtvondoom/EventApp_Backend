@@ -32,26 +32,33 @@ function getColor(percentageLeft){
     }
 }
 
+// xrhsh function gia na mporoume na allzoume xrwma kai sto transaction call
 
-// add new event + calculate kai fill ticketColor apo tis 2 function panw
-app.post('/newEventA',async(req,res)=>{
-    try{
-        let totalQuantity = 0;
-        let totalRemaining = 0;
+function help(tickets){
+    let totalQuantity = 0;
+    let totalRemaining = 0;
 
-        req.body.tickets.forEach(ticket => {
+        tickets.forEach(ticket => {
             totalQuantity += ticket.quantity;
             totalRemaining += ticket.remaining;
         });
         let percentageLeft = getPercentage(totalQuantity,totalRemaining);
         let ticketColor = getColor(percentageLeft);
+        return ticketColor;
+}
+
+
+// add new event + calculate kai fill ticketColor apo tis 2 function panw
+app.post('/newEventA',async(req,res)=>{
+    try{
+        const tickets = req.body.tickets;
+        let ticketColor = help(tickets)
         const event = await Event.create({
             ...req.body, 
             ticketColor, 
         });
         res.status(200).json(event);
     } catch (error) {
-        console.log(error.message);
         res.status(500).json({ message: error.message });
     }
 })
@@ -139,7 +146,7 @@ app.get(`/findEvent/:id`,async(req,res)=>{
 
 
 
-
+                                                // gia diples --> Typika no need giati to app tha einai me gnwsta all its ok i guess
 const locationTranslate = {
     "thessaloniki": "ΘΕΣΣΑΛΟΝΙΚΗ",
     "thessalonikh": "ΘΕΣΣΑΛΟΝΙΚΗ",
@@ -193,8 +200,6 @@ app.get(`/events/location/:location`,async(req,res)=>{
 const typeTranslate = {
     "standupcomedy": "STAND-UP COMEDY",
     "synaylia" : "ΣΥΝΑΥΛΙΑ"
-    
-
 };
 
 
@@ -218,10 +223,73 @@ app.get(`/events/type/:eventType`,async(req,res)=>{
 })
 
 
+//Filter based on custom event
+app.get(`/eventByCustomId/:customId`,async(req,res)=>{
+    try{
+        const {customId} = req.params;
+        const event = await Event.find({customId :customId});
+        const customIdRegex = /^[a-z]{1}_[a-z]{3}_[a-z]{2,}$/;
+        if(!customIdRegex.test(customId)){
+            return res.status(400).json({
+                message: `${customId} is not a valid customId. Expected format: 1 letter, 3 letters, >1 letter.`
+            });
+        }
+        if(!event || event.length ==0){
+            res.status(404).json({message:`Event with id ${customId} does not exist`})
+        }else{
+            res.status(200).json(event)
+        }
+    }catch(error){
+        res.status(500).json({error: error.message})
+    }
+})
+
+
+
+app.get(`/transaction/:id/:ticketNum/:ticketType`,async(req,res)=>{
+    try{
+        const {ticketType} = req.params;
+        const {id} = req.params;
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: `Invalid event ID format: ${id}` });
+        }
+        const {ticketNum} = req.params;
+        const parsedTicketNum = parseInt(ticketNum, 10);
+        if(isNaN(parsedTicketNum) || parsedTicketNum <= 0){
+            return res.status(400).json({message: `Invalid number of tickets`});
+        }
+        const event = await Event.findById(id);
+        if(!event || event.length == 0){
+            res.status(404).json({message:`Unable to detect event with id:${id}`})
+            return;
+        }
+        let k = false;
+        for(let i = 0;i<event.tickets.length;i++){
+            if(event.tickets[i].ticketType == ticketType){
+                k = true;
+            }
+        }
+        if(!k){
+            return res.status(404).json({message: `Unable to detect ticket with ticketType:${ticketType}`})
+        }
+        if(event.tickets[ticketType].remaining >= parsedTicketNum){
+            event.tickets[ticketType].remaining -= parsedTicketNum;
+            event.ticketColor = help(event.tickets)
+            await event.save();
+            return res.status(200).json({message:`Transaction completed. You successfully purchased ${parsedTicketNum} ticket`})
+        }else{
+            return res.status(400).json({message:`Not enough tickets available.We are sorry!`})
+        }
+    }catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
+
+app.get(`/`)
 
 // change username and password before use 
 mongoose.
-connect('mongodb+srv://username:password@eventappcluster.l1uub.mongodb.net/?retryWrites=true&w=majority&appName=EventAppCluster')
+connect('mongodb+srv://SkgEventApp:Year2425@eventappcluster.l1uub.mongodb.net/?retryWrites=true&w=majority&appName=EventAppCluster')
 .then(() => {
     console.log('Connected to MongoDB')
 }).catch((error)=>{
