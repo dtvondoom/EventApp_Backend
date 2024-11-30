@@ -23,6 +23,10 @@ const eventSchema = mongoose.Schema(
             type:String,
             required: false
         },
+        genre:{
+            type:String,
+            required: false
+        },
         imageLink:{
             type: String,
             required: false
