@@ -198,8 +198,8 @@ app.get(`/events/location/:location`,async(req,res)=>{
 
 const typeTranslate = {
     "standupcomedy": "STAND-UP COMEDY",
-    "synaulia" : "ΣΥΝΑΥΛΙΑ",
-    "concert" : "ΣΥΝΑΥΛΙΑ",
+    "mousikh" : "ΜΟΥΣΙΚΗ",
+    "music" : "ΜΟΥΣΙΚΗ",
     "theater" : "ΘΕΑΤΡΟ",
     "theatro" : "ΘΕΑΤΡΟ",
     "artgallery" : "ΕΚΘΕΣΗ ΤΕΧΝΗΣ",
