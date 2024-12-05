@@ -118,6 +118,10 @@ app.put('/updateEvent/:id',async(req,res)=>{
     }
 })
 
+app.get('/', async(req,res)=>{
+    res.send('Welcome to the event app!')
+})
+
 //Find all events
 app.get('/allEvents',async(req,res)=>{
     try {
